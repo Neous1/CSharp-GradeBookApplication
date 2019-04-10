@@ -36,16 +36,17 @@ namespace GradeBook.UserInterfaces
             var parts = command.Split(' ');
             if (parts.Length != 3)
             {
-                Console.WriteLine("Command not valid, Create requires a name and type of gradebook.");
+                Console.WriteLine("Command not valid, Create requires a name, type of gradebook, if it's weighted (true/false).");
                 return;
             }
             var name = parts[1];
             var type = parts[2].ToLower();
+            var weighted = bool.Parse(parts[3]);
             BaseGradeBook gradeBook;
             if (type == "standard")
-                gradeBook = new StandardGradebook(name);
+                 gradeBook = new StandardGradebook(name, weighted);
             else if (type == "ranked")
-                gradeBook = new RankedGradeBook(name);
+                gradeBook = new RankedGradeBook(name, weighted);
             else
             {
                 Console.WriteLine("{0} is not a supported type of gradebook, please try again", type);
